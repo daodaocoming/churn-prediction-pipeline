@@ -205,3 +205,17 @@ __marimo__/
 
 # cleaned data
 /data/clean/
+
+# Kaggle creds
+/.kaggle/
+
+# Raw & intermediate data
+data/raw/
+data/clean/
+
+# Generated reports
+reports/*.html
+
+# Jupyter drafts (optional)
+*.ipynb
+
