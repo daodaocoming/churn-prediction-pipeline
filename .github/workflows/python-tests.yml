@@ -1,0 +1,26 @@
+# .github/workflows/python-tests.yml
+name: pytest                          # This is the label you’ll see in the Actions tab
+
+on: [push, pull_request]              # Run on every push or PR
+
+jobs:
+  test:
+    runs-on: ubuntu-latest            # Free Ubuntu VM provided by GitHub
+    steps:
+      - uses: actions/checkout@v4     # 1️⃣ Pull your repo contents onto the VM
+
+      - uses: actions/setup-python@v5 # 2️⃣ Install Python 3.11 on that VM
+        with:
+          python-version: 3.11
+
+      # 3️⃣ Install your conda‑exported packages with pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Parse env.yml → strip "dependencies:" header & "prefix" line → pip install -
+          pip install -r <(grep -A9999 "dependencies:" env.yml | grep -v "prefix" | sed 's/- //')
+
+      # 4️⃣ Run the test suite
+      - name: Run tests
+        run: pytest -q
+
