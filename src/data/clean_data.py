@@ -17,28 +17,31 @@ Usage (from project root):
         --input  data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv \
         --output data/clean/telco_clean.parquet
 """
+
 from __future__ import annotations
 
 import click
+import numpy as np
 import pandas as pd
 from pathlib import Path
 from tqdm import tqdm
 
+
 def load_raw(path: Path) -> pd.DataFrame:
     df = pd.read_csv(path)
 
-    df["TotalCharges"] = (
-        pd.to_numeric(df["TotalCharges"].replace(r"^\s*$", pd.NA, regex=True),
-                      errors="coerce")
+    df["TotalCharges"] = pd.to_numeric(
+        df["TotalCharges"].replace(r"^\s*$", pd.NA, regex=True), errors="coerce"
     )
 
     df["SeniorCitizen"] = df["SeniorCitizen"].astype("bool")
     return df
 
+
 def impute(df: pd.DataFrame) -> pd.DataFrame:
     num_cols = df.select_dtypes(include="number").columns
     cat_cols = df.select_dtypes(exclude="number").columns
-  
+
     for col in num_cols:
         if df[col].isna().any():
             mean_val = df[col].mean()
@@ -49,7 +52,9 @@ def impute(df: pd.DataFrame) -> pd.DataFrame:
             df[col].fillna("Unknown", inplace=True)
     return df
 
+
 YES_NO = {"Yes", "No"}
+
 
 def cast_yes_no(df: pd.DataFrame) -> pd.DataFrame:
     for col in df.columns:
@@ -58,13 +63,36 @@ def cast_yes_no(df: pd.DataFrame) -> pd.DataFrame:
             df[col] = df[col].astype("category")
     return df
 
+
+def winsorize_iqr(df: pd.DataFrame, factor: float = 1.5) -> pd.DataFrame:
+    """
+    Clip numerical columns to the IQR-based fences:
+    [Q1 - factor·IQR, Q3 + factor·IQR]
+    """
+    num_cols = df.select_dtypes(include=["number"]).columns
+    for col in num_cols:
+        q1, q3 = df[col].quantile([0.25, 0.75])
+        iqr = q3 - q1
+        low, high = q1 - factor * iqr, q3 + factor * iqr
+        df[col] = df[col].clip(lower=low, upper=high)
+    return df
+
+
 @click.command()
-@click.option("--input",  "-i", type=click.Path(exists=True, dir_okay=False),
-              default="data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv")
-@click.option("--output", "-o", type=click.Path(dir_okay=False),
-              default="data/clean/telco_clean.parquet")
+@click.option(
+    "--input",
+    "-i",
+    type=click.Path(exists=True, dir_okay=False),
+    default="data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv",
+)
+@click.option(
+    "--output",
+    "-o",
+    type=click.Path(dir_okay=False),
+    default="data/clean/telco_clean.parquet",
+)
 def main(input: str, output: str) -> None:
-    inp  = Path(input).resolve()
+    inp = Path(input).resolve()
     outp = Path(output).resolve()
     outp.parent.mkdir(parents=True, exist_ok=True)
 
@@ -83,9 +111,13 @@ def main(input: str, output: str) -> None:
     print("🔖  Casting Yes/No columns …")
     df = cast_yes_no(df)
 
+    print("✂️  Winsorizing numerical outliers …")
+    df = winsorize_iqr(df)
+
     print(f"💾  Writing {rel(outp)}")
     df.to_parquet(outp, index=False)
     print("✅  Done. Clean shape:", df.shape)
+
 
 if __name__ == "__main__":
     main()
