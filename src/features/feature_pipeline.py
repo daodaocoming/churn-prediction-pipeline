@@ -72,7 +72,7 @@ def build_preprocessor(
     dummy = pd.concat([dummy_num, dummy_cat], axis=1)
 
     pipe.fit(dummy)
-    feature_names = pipe.get_feature_names_out().tolist()
+    feature_names = pipe.named_steps["pre"].get_feature_names_out().tolist()
 
     return pipe, feature_names
 
