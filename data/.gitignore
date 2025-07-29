@@ -1,0 +1,3 @@
+# skip heavy auto‑generated files
+processed/
+clean/*.parquet
