@@ -1,28 +1,20 @@
-"""
-tune_xgb_optuna.py – Day 12  (方案 A：持久化 Optuna Study)
----------------------------------------------------------
-* 30 trials → 优化 n_estimators, max_depth, learning_rate, subsample, colsample_bytree
-* 目标：5-fold PR-AUC 均值最大
-* 每个 trial 结果写入同一份 sqlite DB (optuna.db) & MLflow experiment “xgb_optuna”
-"""
-
 from pathlib import Path
 import joblib, optuna, mlflow
 import numpy as np
 from sklearn.model_selection import StratifiedKFold, cross_val_score
 from xgboost import XGBClassifier
 
-# ─────────────────────────── 路径 ────────────────────────────
-ROOT     = Path(__file__).resolve().parents[2]       # 项目根
-DATA_DIR = ROOT / "data" / "processed"
-DB_PATH  = ROOT / "optuna.db"                        # 唯一持久化文件
 
-# ─────────────────────────── 数据 ────────────────────────────
+ROOT     = Path(__file__).resolve().parents[2]       
+DATA_DIR = ROOT / "data" / "processed"
+DB_PATH  = ROOT / "optuna.db"                        
+
+
 X = joblib.load(DATA_DIR / "X_train.pkl")
 y = joblib.load(DATA_DIR / "y_train.pkl")
 cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
-# ────────────────────────── 目标函数 ──────────────────────────
+
 def objective(trial: optuna.Trial) -> float:
     params = {
         "n_estimators":      trial.suggest_int(   "n_estimators", 200, 800, step=100),
@@ -50,11 +42,11 @@ def objective(trial: optuna.Trial) -> float:
 study = optuna.create_study(
     study_name="xgb_pr_auc",
     direction="maximize",
-    storage=f"sqlite:///{DB_PATH}",   # ★ 持久化到同一 DB
+    storage=f"sqlite:///{DB_PATH}",  
     load_if_exists=True
 )
 
-# ──────────────────────── MLflow 设置 ────────────────────────
+
 mlflow.set_experiment("xgb_optuna")
 
 def mlflow_callback(study: optuna.Study, trial: optuna.Trial):
@@ -64,15 +56,15 @@ def mlflow_callback(study: optuna.Study, trial: optuna.Trial):
         mlflow.log_metric("roc_auc", trial.user_attrs["roc_auc"])
         mlflow.set_tags({"optuna_study": study.study_name})
 
-# ─────────────────────────── 开始优化 ─────────────────────────
+
 study.optimize(
     objective,
-    n_trials=30,
+    n_trials=80,
     callbacks=[mlflow_callback],
     show_progress_bar=True
 )
 
-# ─────────────────────────── 输出最佳 ─────────────────────────
+
 best = study.best_trial
 print(f"🎯 Best PR-AUC : {best.value:.4f}")
 print("Best params :", best.params)
