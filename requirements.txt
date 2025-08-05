@@ -19,7 +19,7 @@ category-encoders==2.6.3
 certifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1752493286596/work/certifi
 cffi @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_e4xd9yd9i2/croot/cffi_1736182819442/work
 charset-normalizer @ file:///croot/charset-normalizer_1721748349566/work
--e git+ssh://git@github.com/daodaocoming/churn-prediction-pipeline.git@056d9acd1ae61e24b8ecb4542e6b6637ca980cd4#egg=churnpipe
+-e git+ssh://git@github.com/daodaocoming/churn-prediction-pipeline.git@b17c3e569011d70231fefcc8fa520c500dcb62f7#egg=churnpipe
 click @ file:///home/conda/feedstock_root/build_artifacts/click_1747811314515/work
 cloudpickle==3.1.1
 colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1733218098505/work
@@ -37,6 +37,7 @@ entrypoints==0.4
 exceptiongroup @ file:///home/conda/feedstock_root/build_artifacts/exceptiongroup_1746947292760/work
 executing @ file:///opt/conda/conda-bld/executing_1646925071911/work
 fastjsonschema @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_d1wgyi4enb/croot/python-fastjsonschema_1731939426145/work
+flake8==7.3.0
 Flask==3.1.1
 fonttools @ file:///Users/runner/miniforge3/conda-bld/fonttools_1752722779254/work
 fqdn==1.5.1
@@ -84,6 +85,7 @@ Markdown==3.8.2
 MarkupSafe @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_1f_uj4vxik/croot/markupsafe_1738584045311/work
 matplotlib==3.9.4
 matplotlib-inline @ file:///Users/cbousseau/work/recipes/ci_py311/matplotlib-inline_1677918241899/work
+mccabe==0.7.0
 mistune @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_5be80wp982/croot/mistune_1741123981908/work
 mlflow==2.12.2
 multimethod @ file:///home/conda/feedstock_root/build_artifacts/multimethod_1734279349406/work
@@ -120,9 +122,11 @@ ptyprocess @ file:///tmp/build/80754af9/ptyprocess_1609355006118/work/dist/ptypr
 pure-eval @ file:///opt/conda/conda-bld/pure_eval_1646925070566/work
 puremagic==1.30
 pyarrow==15.0.2
+pycodestyle==2.14.0
 pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
 pydantic @ file:///home/conda/feedstock_root/build_artifacts/pydantic_1749927112905/work
 pydantic_core @ file:///Users/runner/miniforge3/conda-bld/bld/rattler-build_pydantic-core_1746625315/work
+pyflakes==3.4.0
 Pygments @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_f0f10r98sf/croot/pygments_1744664126614/work
 pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1743089729650/work
 PySocks @ file:///Users/cbousseau/work/recipes/ci_py311/pysocks_1677906386870/work
