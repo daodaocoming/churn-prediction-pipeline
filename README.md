@@ -20,3 +20,13 @@ Build an end‑to‑end ML pipeline that predicts customer churn and deploys a r
 conda env create -f env.yml
 conda activate churn-env
 jupyter lab
+
+| Date        | Model                | ROC‑AUC ± std | PR‑AUC ± std | Run ID |
+|-------------|----------------------|---------------|--------------|--------|
+| 2025‑07‑30 | Logistic Regression | 0.848 ± 0.011 | 0.661 ± 0.015 | `logreg_l2_balanced` |
+#### Day 12 – Tree Boosting & Tuning
+- Baseline XGBoost (5‑fold) → ROC‑AUC ≈ 0.88, PR‑AUC ≈ 0.71  
+- Optuna (30 trials) → Best PR‑AUC ≈ 0.74  
+- Best model saved at `models/xgb_optuna_best.pkl`  
+- All trials logged in MLflow experiment **“xgb_optuna”**
+吗，，，，，
