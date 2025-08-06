@@ -29,4 +29,10 @@ jupyter lab
 - Optuna (30 trials) → Best PR‑AUC ≈ 0.74  
 - Best model saved at `models/xgb_optuna_best.pkl`  
 - All trials logged in MLflow experiment **“xgb_optuna”**
-吗，，，，，
+
+### Current Production Model (Day 20)
+
+| Model | ROC-AUC | PR-AUC | File |
+|-------|:------:|:------:|------|
+| **XGBoost (Optuna)** | 0.872 | 0.712 | `models/final/model.pkl` |
+MD
