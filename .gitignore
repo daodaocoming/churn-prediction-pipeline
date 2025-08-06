@@ -223,4 +223,6 @@ mlruns/
 optuna*.db
 figures/
 
+# --- exceptions we DO want to track ---
+!src/models/final_model.py
 

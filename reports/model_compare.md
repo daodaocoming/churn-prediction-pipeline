@@ -1,29 +1,33 @@
-# Model Comparison (Day 18)
+cat > reports/model_compare.md <<'MD'
+# Model Comparison — Day 18 ➜ 20
 
-The plots below compare the 5-fold CV performance of the two candidates on the **clean Telco dataset (7 043 rows × 38 features)**:
+| Model | ROC-AUC | PR-AUC |
+|-------|:------:|:------:|
+| Logistic Regression | 0.852 | 0.666 |
+| **XGBoost (Optuna)** | **0.872** | **0.712** |
+| LightGBM (Optuna) | 0.857 | 0.683 |
 
 <div align="center">
 
-| ![ROC Curve](figures/roc_compare.png) | ![PR Curve](figures/pr_compare.png) |
-|:--:|:--:|
-| **ROC‐AUC** | **PR‐AUC (Average Precision)** |
+![ROC curves](notebooks/figures/roc_compare.png)  
+*Figure 1 — ROC curve comparison*
+
+![PR curves](notebooks/figures/pr_compare.png)  
+*Figure 2 — Precision-Recall curve comparison*
 
 </div>
 
-<br>
-
-| Model   | ROC-AUC | PR-AUC |
-|---------|:------:|:------:|
-| **LogReg** | 0.852 | 0.666 |
-| **XGB**    | **0.872** | **0.712** |
-
 ---
 
-### Key take-aways
+## Final decision
 
-* **XGBoost outperforms Logistic Regression** by&nbsp;`+0.020` ROC-AUC and `+0.046` PR-AUC.  
-  The lift is consistent across the full curve, not just at a single threshold.
-* On the PR plot, the orange XGB curve stays above the blue LogReg curve for most recall levels—  
-  indicating higher precision, especially in the high-recall region important for churn mitigation.
-* **Decision:** Promote XGBoost as the default production model.  
-  Artifact path → `models/xgb_optuna_best.pkl`
+* **Champion:** **XGBoost (Optuna tuned)**  
+* **Saved as:** `models/final/model.pkl`  
+* **Why:** highest PR-AUC (+0.029 vs LGBM, +0.046 vs LogReg) with sub-5 ms inference.
+
+Use it anywhere:
+
+```python
+from src.models.final_model import load
+model = load()
+
