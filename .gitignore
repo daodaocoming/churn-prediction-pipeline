@@ -216,6 +216,11 @@ data/clean/
 # Generated reports
 reports/*.html
 
-# Jupyter drafts (optional)
-*.ipynb
+# Models
+# artefacts
+models/
+mlruns/
+optuna*.db
+figures/
+
 
