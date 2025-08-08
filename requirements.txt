@@ -19,7 +19,7 @@ category-encoders==2.6.3
 certifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1752493286596/work/certifi
 cffi @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_e4xd9yd9i2/croot/cffi_1736182819442/work
 charset-normalizer @ file:///croot/charset-normalizer_1721748349566/work
--e git+ssh://git@github.com/daodaocoming/churn-prediction-pipeline.git@1643935284ed4d2a8942531c153f9a94b1ee504e#egg=churnpipe
+-e git+ssh://git@github.com/daodaocoming/churn-prediction-pipeline.git@6075d2a3ca8fd9bd533a7d5349424ee5f69026b2#egg=churnpipe
 click @ file:///home/conda/feedstock_root/build_artifacts/click_1747811314515/work
 cloudpickle==3.1.1
 colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1733218098505/work
@@ -36,6 +36,7 @@ docker==7.1.0
 entrypoints==0.4
 exceptiongroup @ file:///home/conda/feedstock_root/build_artifacts/exceptiongroup_1746947292760/work
 executing @ file:///opt/conda/conda-bld/executing_1646925071911/work
+fastapi==0.116.1
 fastjsonschema @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_d1wgyi4enb/croot/python-fastjsonschema_1731939426145/work
 flake8==7.3.0
 Flask==3.1.1
@@ -50,6 +51,7 @@ gunicorn==22.0.0
 h11 @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_557zp2ij9k/croot/h11_1748442489221/work
 htmlmin @ file:///home/conda/feedstock_root/build_artifacts/htmlmin_1710942103058/work
 httpcore @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_941yf7p5zt/croot/httpcore_1748526061031/work
+httptools==0.6.4
 httpx @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_28ztzk1ij8/croot/httpx_1746747850138/work
 idna @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_a12xpo84t2/croot/idna_1714398852854/work
 ImageHash @ file:///home/conda/feedstock_root/build_artifacts/imagehash_1734862241422/work
@@ -97,7 +99,7 @@ nbformat @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_2
 nest-asyncio @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_310vb5e2a0/croot/nest-asyncio_1708532678212/work
 networkx @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_networkx_1749078300/work
 notebook_shim @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_ceoiz4k8qs/croot/notebook-shim_1741707775649/work
-numba @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_a6rxcl2vro/croot/numba_1750798183489/work
+numba==0.61.0
 numexpr @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_59ckh5l11x/croot/numexpr_1752521724434/work
 numpy==1.26.4
 optuna==4.4.0
@@ -124,14 +126,15 @@ puremagic==1.30
 pyarrow==15.0.2
 pycodestyle==2.14.0
 pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
-pydantic @ file:///home/conda/feedstock_root/build_artifacts/pydantic_1749927112905/work
-pydantic_core @ file:///Users/runner/miniforge3/conda-bld/bld/rattler-build_pydantic-core_1746625315/work
+pydantic==2.6.4
+pydantic_core==2.16.3
 pyflakes==3.4.0
 Pygments @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_f0f10r98sf/croot/pygments_1744664126614/work
 pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1743089729650/work
 PySocks @ file:///Users/cbousseau/work/recipes/ci_py311/pysocks_1677906386870/work
 pytest==8.2.1
 python-dateutil @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_66ud1l42_h/croot/python-dateutil_1716495741162/work
+python-dotenv==1.1.1
 python-json-logger @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_9bjmcmh4nm/croot/python-json-logger_1734370248301/work
 python-slugify==8.0.4
 pytz==2024.2
@@ -157,6 +160,7 @@ soupsieve @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_
 SQLAlchemy==2.0.41
 sqlparse==0.5.3
 stack-data @ file:///opt/conda/conda-bld/stack_data_1646927590127/work
+starlette==0.47.2
 statsmodels @ file:///Users/runner/miniforge3/conda-bld/statsmodels_1751917508392/work
 tabulate @ file:///home/conda/feedstock_root/build_artifacts/tabulate_1733589744265/work
 terminado @ file:///Users/cbousseau/work/recipes/ci_py311/terminado_1677918849903/work
@@ -174,11 +178,15 @@ tzdata @ file:///croot/python-tzdata_1746123641790/work
 unicodedata2 @ file:///Users/runner/miniforge3/conda-bld/unicodedata2_1736692555874/work
 uri-template==1.3.0
 urllib3 @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_95v32ztwo_/croot/urllib3_1750775480393/work
+uvicorn==0.35.0
+uvloop==0.21.0
 visions==0.8.1
+watchfiles==1.1.0
 wcwidth @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_8el7txr34i/croot/wcwidth_1750352901095/work
 webcolors==24.11.1
 webencodings==0.5.1
 websocket-client @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_d37u7gqts8/croot/websocket-client_1715878310260/work
+websockets==15.0.1
 Werkzeug==3.1.3
 wordcloud @ file:///Users/runner/miniforge3/conda-bld/wordcloud_1733148771549/work
 xgboost==3.0.3
